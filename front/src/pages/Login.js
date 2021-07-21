@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useNavigate} from 'react-router-dom';
 
 let ws=null;
@@ -31,7 +31,7 @@ function Login(){
                     <div id="login-box" className="col-md-12">
                         <div id="login-form" className="form" action="" method="post">
                             <h3 className="text-center text-info">Login</h3>
-                            <img src="triki.png" width="100" height="100" className="triki-img" />   
+                            <img alt="game logo" src="triki.png" width="100" height="100" className="triki-img" />   
                             <div className="form-group">
                                 <label for="username" className="text-info">Username:</label><br></br>
                                 <input onChange={e => setUsername(e.target.value)} type="text" name="username" id="username" className="form-control" placeholder="any username"></input>

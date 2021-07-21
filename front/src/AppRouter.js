@@ -1,5 +1,3 @@
-import { BrowserRouter, Link, Outlet, useRoutes } from 'react-router-dom';
-import {BrowserRouter as Router} from "react-router-dom"
 import {Routes, Route} from "react-router-dom";
 import Game from "./pages/Game";
 import Users from "./pages/Users";

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import swal from 'sweetalert';
 import {useNavigate} from 'react-router-dom';
 
@@ -47,13 +47,12 @@ function paintBoard(board){
 
 function buildCell(n){
     let id="cell_"+n;
-    let markup=null;
     if([0].indexOf(n)!=-1){
         return (
             <>
-            <div className="box-left" onClick={()=>markLeft(n)}><img src="right.png" width="24" height="24" ></img></div>
+            <div className="box-left" onClick={()=>markLeft(n)}><img alt="right stack" src="right.png" width="24" height="24" ></img></div>
             <div className="box-dark">
-                <img id={id} src="blank.png" width="48" height="48"></img>
+                <img id={id} src="blank.png" width="48" height="48" alt="blank cell"></img>
             </div>
             </>
         )
@@ -61,22 +60,22 @@ function buildCell(n){
         if(n%2==0)
             return (
                 <>
-                <div className="box-right" onClick={()=>markRight(n-7)}><img src="left.png" width="24" height="24" ></img></div>
-                <div className="box-left" onClick={()=>markLeft(n+1)}><img src="right.png" width="24" height="24" ></img></div>
+                <div className="box-right" onClick={()=>markRight(n-7)}><img alt="right stack" src="left.png" width="24" height="24" ></img></div>
+                <div className="box-left" onClick={()=>markLeft(n+1)}><img alt="left stack" src="right.png" width="24" height="24" ></img></div>
                 <div className="box-dark">
-                    <img id={id} src="blank.png" width="48" height="48"></img>
+                    <img id={id} alt="cell indicator" src="blank.png" width="48" height="48"></img>
                 </div>
                 </>
             );
         else    
             return (
                 <>
-                <div className="box-right" onClick={()=>markRight(n-7)}><img src="left.png" width="24" height="24" ></img></div>
+                <div className="box-right" onClick={()=>markRight(n-7)}><img alt="left stack" src="left.png" width="24" height="24" ></img></div>
                 <div className="box-left" onClick={()=>markLeft(n+1)}>
-                    <img src="right.png" width="24" height="24" ></img>
+                    <img alt="right stack" src="right.png" width="24" height="24" ></img>
                 </div>
                 <div className="box">
-                    <img id={id} src="blank.png" width="48" height="48"></img>
+                    <img alt="cell indicator" id={id} src="blank.png" width="48" height="48"></img>
                 </div>
                 </>
             );
@@ -85,9 +84,9 @@ function buildCell(n){
             <>
             
             <div className="box-dark">
-                <img id={id} src="blank.png" width="48" height="48"></img>
+                <img alt="cell indicator" id={id} src="blank.png" width="48" height="48"></img>
             </div>
-            <div className="box-right" onClick={()=>markRight(n-6)}><img src="left.png" width="24" height="24" ></img></div>
+            <div className="box-right" onClick={()=>markRight(n-6)}><img alt="left stack" src="left.png" width="24" height="24" ></img></div>
             </>
         )
     }
@@ -95,13 +94,13 @@ function buildCell(n){
     if(n%2==0)
         return (
             <div className="box-dark">
-                <img id={id} src="blank.png" width="48" height="48"></img>
+                <img alt="cell indicator" id={id} src="blank.png" width="48" height="48"></img>
             </div>
         );
     else
         return (
             <div className="box">
-                <img id={id} src="blank.png" width="48" height="48"></img>
+                <img alt="cell indicator" id={id} src="blank.png" width="48" height="48"></img>
             </div>
         );
 }
@@ -114,8 +113,6 @@ function initSocket(){
     };
 
     ws.onmessage = function (e) {
-        debugger;
-        let user_a=false;
         let game=JSON.parse(e.data);
         if(game.id!=localStorage["id"]){return;}
         

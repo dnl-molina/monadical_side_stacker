@@ -1,0 +1,8 @@
+INFO:root:{'command': 'login', 'username': 'asdf'}
+INFO:root:{'command': 'login', 'username': 'dmolina'}
+INFO:root:{'command': 'move', 'username': 'asdf', 'id': '5', 'mark': '1', 'row': 0, 'side': 'r'}
+INFO:root:{'command': 'login', 'username': 'eeee'}
+INFO:root:{'command': 'login', 'username': 'ffff'}
+INFO:root:{'command': 'move', 'username': 'eeee', 'id': '6', 'mark': '2', 'row': 0, 'side': 'r'}
+INFO:root:{'command': 'move', 'username': 'ffff', 'id': '6', 'mark': '1', 'row': 1, 'side': 'r'}
+INFO:root:{'command': 'login', 'username': 'test'}
