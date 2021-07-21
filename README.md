@@ -76,9 +76,10 @@ pip install -r requirements.txt
 python app.py
 ```
 
-#test the application
+# test the application
 \
 after install the application, you need to open [http://localhost:3000](http://localhost:3000)
+\
 1.login screen
 \
 ![login screen img](https://iacode.co/img/1.png)
