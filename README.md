@@ -83,13 +83,13 @@ python app.py
 after install the application, you need to open [http://localhost:3000](http://localhost:3000)
 1.login screen
 \
-![Drag Racing](https://iacode.co/img/1.png)
+![login screen img](https://iacode.co/img/1.png)
 2.choose user to play with
 \
-![Drag Racing](https://iacode.co/img/2.png)
+![choose player img](https://iacode.co/img/2.png)
 3.start the game
 \
-![Drag Racing](https://iacode.co/img/3.png)
+![start the game img](https://iacode.co/img/3.png)
 
 ### The game have the next rules:
 This is essentially connect-four, but the pieces stack on either side of the board instead of bottom-up.
