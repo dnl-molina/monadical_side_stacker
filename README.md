@@ -17,8 +17,6 @@ go to the cloned repository and run the next commands
 ### run front
 ```
 cd front
-npm install
-npm run build
 docker build -t front .
 docker stop front & docker rm front & docker run --name front -p 3000:80 front
 ```
