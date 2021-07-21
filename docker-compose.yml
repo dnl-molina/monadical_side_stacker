@@ -1,0 +1,11 @@
+version: "3.2" 
+services:
+  back:
+    build: back/.
+    ports:
+      - "3001:3001"
+      - "3002:3002"
+  front:
+    build: front/.
+    ports:
+      - "3000:80"

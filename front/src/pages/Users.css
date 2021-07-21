@@ -1,0 +1,31 @@
+#user-list{
+    text-align:center;
+    margin:5%;
+    margin-left:30%;
+    margin-right:30%;
+    width:40%;
+    background-color:#eaeaea00;
+    border-radius:2em;
+}
+
+#user-list div{
+    cursor:pointer;
+    background-color:#dadada;
+    border-radius:2em;
+    padding:0.5em;
+    border:1px solid #999;
+}
+
+#user-list div:hover{
+    background-color:#aaa;
+    border-radius:2em;
+}
+
+@media all and (min-width: 1px) and (max-width: 500px){
+    #user-list{
+        margin:5%;
+        margin-left:10%;
+        margin-right:10%;
+        width:80%;
+    }
+}

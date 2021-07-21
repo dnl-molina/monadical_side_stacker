@@ -1,0 +1,7 @@
+{
+    "deploys":{
+        "front":"call front/deploy.bat",
+        "back":"call back/deploy.bat",
+        "back_test":"call back/test.bat"
+    }
+}
