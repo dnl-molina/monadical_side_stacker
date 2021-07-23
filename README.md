@@ -18,13 +18,13 @@ go to the cloned repository and run the next commands
 ```
 cd front
 docker build -t front .
-docker stop front & docker rm front & docker run --name front -p 3000:80 front
+docker run --name front -p 3000:80 front
 ```
 ### run back
 ```
 cd back
 docker build -t back .
-docker stop back & docker rm back & docker run --name back -p 3001:3001 -p 3002:3002 back
+docker run --name back -p 3001:3001 -p 3002:3002 back
 ```
 
 # How to run with linux
