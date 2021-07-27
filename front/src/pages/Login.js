@@ -3,6 +3,10 @@ import {useNavigate} from 'react-router-dom';
 
 let ws=null;
 function loginGame(username,navigate){
+    if(username=="bot"){
+        alert("you can't take this username");
+        return;
+    }
     localStorage["username"]=username;
     fetch(`http://localhost:3001/login`,{
         method: "POST",
@@ -14,6 +18,16 @@ function loginGame(username,navigate){
         navigate("users");
     });
     ws.send(JSON.stringify({"command":"login", "username":username}));
+}
+
+function playWithBot(navigate){
+    let randomUser="random-"+Math.random();
+    localStorage["mark"]=1;
+    localStorage["user_a"]=randomUser;
+    localStorage["user_b"]="bot";
+    localStorage["username"]=randomUser;
+    // localStorage["id"]=-1;
+    navigate("/game");
 }
 
 function Login(){
@@ -38,7 +52,10 @@ function Login(){
                             </div>
                             <br></br>
                             <div className="form-group">
-                                <button className="btn btn-info btn-md white" onClick={()=>loginGame(username,navigate)}>Ingresar</button>
+                                <button className="btn btn-info btn-md white" onClick={()=>loginGame(username,navigate)}>Enter</button>
+                                <br/>
+                                <br/>
+                                <button className="btn btn-info btn-md white" onClick={()=>playWithBot(navigate)}>Play with bot</button>
                             </div>
                         </div>
                     </div>

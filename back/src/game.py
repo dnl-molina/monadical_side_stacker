@@ -81,7 +81,7 @@ class Board:
     
     def check_winner_closes(self, x, y, mark, counter, increase):
         """check the nearest elements in all directions with the same mark"""
-        if self.is_in_bounds(x,y) and self.board[x][y]==mark:
+        if self.is_in_bounds(x,y) and int(self.board[x][y])==int(mark):
             x+=increase["increase_x"]
             y+=increase["increase_y"]
             counter+=1

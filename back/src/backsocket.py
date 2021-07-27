@@ -6,8 +6,10 @@ import logging
 import os
 import re
 import sys
+import random
 from game import Board, Move, Game, User
 from db import Database
+
 
 logging.basicConfig(filename=os.path.join(os.path.dirname(os.path.dirname(__file__)), "log/websocket.log"), level='INFO')
 logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
@@ -107,10 +109,21 @@ class GameServer(Server):
             board=Board(matrix_board)
             move=Move(side=info.get("side"), mark=info.get("mark"), x=info.get("row"))
             board.add_move(move)
+            bot_move=None
+            if game.get("user_b")=="bot":
+                bot_move=Move(side=random.choice(("l", "r")), mark=2, x=random.choice((0,1,2,3,4,5,6)))
+                board.add_move(bot_move)
+                
             win=board.check_winner(move)
+            winner_mark=info.get("mark") if win else ""
+            
+            if not win and game.get("user_b")=="bot":
+                win=board.check_winner(bot_move)
+                if win:winner_mark=2
+            
             g=Game(user_a=game.get("user_a"), user_b=game.get("user_b"), board=board.board)
             g.update()
-            await server.send_all({"id":game.get("id"),"command":"move", "user_a":g.user_a, "user_b":g.user_b, "board":g.board,"win":win,"winner_mark":info.get("mark") if win else "","mark":info.get("mark")})
+            await server.send_all({"id":game.get("id"),"command":"move", "user_a":g.user_a, "user_b":g.user_b, "board":g.board,"win":win,"winner_mark":winner_mark,"mark":info.get("mark")})
         except Exception as e:
             logging.error("error when the user make a new move in the game", exc_info=exc_info)
    

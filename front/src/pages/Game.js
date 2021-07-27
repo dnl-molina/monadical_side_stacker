@@ -5,7 +5,25 @@ import {useNavigate} from 'react-router-dom';
 import "./Game.css";
 let ws=null;
 let block=false;
+let timeoutBot=null;
+
+function markRightPlayWithBot(n){
+    debugger;
+    let row=parseInt(n/7);
+    ws.send(JSON.stringify({"command":"move","username":"random","id":localStorage["id"],"mark":1,"row":row, "side":"r"}));    
+}
+
+function markLeftPlayWithBot(n){
+    debugger;
+    let row=parseInt(n/7);
+    ws.send(JSON.stringify({"command":"move","username":localStorage["username"],"id":localStorage["id"],"mark":localStorage["mark"],"row":row, "side":"l"}));
+}
+
 function markRight(n){
+    if(localStorage["user_b"]=="bot"){
+        markRightPlayWithBot(n);
+        return;
+    }
     if(!block){
         let row=parseInt(n/7);
         ws.send(JSON.stringify({"command":"move","username":localStorage["username"],"id":localStorage["id"],"mark":localStorage["mark"],"row":row, "side":"r"}));    
@@ -16,6 +34,11 @@ function markRight(n){
 }
 
 function markLeft(n){
+    if(localStorage["user_b"]=="bot"){
+        markLeftPlayWithBot(n);
+        return;
+    }
+    
     if(!block){
         let row=parseInt(n/7);
         ws.send(JSON.stringify({"command":"move","username":localStorage["username"],"id":localStorage["id"],"mark":localStorage["mark"],"row":row, "side":"l"}));
@@ -105,15 +128,37 @@ function buildCell(n){
         );
 }
 
-function initSocket(){
+function checkWinnerBot(game){
+    if(game.board){
+        paintBoard(game.board);
+    }
     
+    if(game.winner_mark==1){
+        swal("You win!!!").then(()=>{
+            resetGame();            
+        });
+        resetGame();
+    }else if(game.winner_mark==2){
+        swal("Bot win, You lose :(").then(()=>{
+            resetGame();            
+        });
+    }
+}
+
+function initSocket(){
+    debugger;
     var socketUrl = `ws://localhost:3002`;
     ws = new WebSocket(socketUrl);
     ws.onopen = function () {
     };
 
     ws.onmessage = function (e) {
+        debugger;
         let game=JSON.parse(e.data);
+        if(game.user_b=="bot"){
+            checkWinnerBot(game);
+            return;
+        }
         if(game.id!=localStorage["id"]){return;}
         
         if(game.board){
@@ -165,7 +210,7 @@ function Game(){
         else localStorage["mark"]=2;
     });
     
-    initSocket();
+    
     block=false;
     setTimeout(function(){
         paintBoard(JSON.parse(localStorage["board"]));    
@@ -205,5 +250,7 @@ function Game(){
     </>
     );
 }
+
+initSocket();
 
 export default Game;
